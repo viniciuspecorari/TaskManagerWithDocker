@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  taskmanagerwithdocker:
+    image: ${DOCKER_REGISTRY-}taskmanagerwithdocker
+    build:
+      context: .
+      dockerfile: TaskManagerWithDocker/Dockerfile
+    depends_on:
+      - sqlserver
+    networks:
+        - nt
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "SqlServer2019!"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "11433:1433"
+    expose:
+      - 1433
+    networks:
+        - nt
+
+networks:
+    nt:
+        external: true
+  

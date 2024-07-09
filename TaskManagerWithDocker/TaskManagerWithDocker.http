@@ -1,0 +1,6 @@
+@TaskManagerWithDocker_HostAddress = http://localhost:5003
+
+GET {{TaskManagerWithDocker_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
